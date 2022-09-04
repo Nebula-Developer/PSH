@@ -2,38 +2,35 @@ using System.Diagnostics;
 
 namespace PSH.Terminal {
     public class TermProc {
-        public static void Start(string command) {
+        public static bool Start(string command) {
+            String function = command.Split(' ')[0];
+            switch (function) {
+                case "exit":
+                    return false;
+            }
+
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = "/bin/bash";
-            startInfo.Arguments = "-c \"" + command + "\"";
+            startInfo.Arguments = "-c \"stty -onlcr; " + command + "\"";
             startInfo.UseShellExecute = false;
+            startInfo.RedirectStandardError = false;
+            startInfo.RedirectStandardOutput = false;
+            startInfo.CreateNoWindow = true;
+            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
 
             Process process = new Process();
             process.StartInfo = startInfo;
             process.Start();
 
-            process.OutputDataReceived += (sender, e) => {
-                Console.Out.Flush();
-                if (e.Data != null) {
-                    Console.Out.Write(e.Data);
-                    Console.Out.Write("\n\n");
-                    Console.Out.Flush();
-                }
-            };
-
-            process.ErrorDataReceived += (sender, e) => {
-                Console.Out.Flush();
-                if (e.Data != null) {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Out.Write(e.Data);
-                    Console.Out.Write("\n");
-                    Console.Out.Flush();
-                    Console.ResetColor();
-                }
-            };
             process.WaitForExit();
             process.Close();
             process.Dispose();
+            return true;
+        }
+
+        public static bool IsError(String str) {
+            String low = str.ToLower();
+            return low.Contains("error") || low.Contains("fatal") || low.Contains("exception") || low.Contains("fail") || low.Contains("cannot");
         }
     }
 }
