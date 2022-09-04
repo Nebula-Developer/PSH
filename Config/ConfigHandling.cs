@@ -3,7 +3,7 @@ using System;
 using PSH.Strings;
 
 namespace PSH.ConfigHandling {
-    public class Config {
+    public class PearlConfig {
         public static Dictionary<string, dynamic>? ReadConfig(String path, bool useAbsPath = false, String commentChar = ";") {
             String configPath = useAbsPath ? path : Path.Combine(AppContext.BaseDirectory, path);
             Dictionary<string, dynamic> config = new Dictionary<string, dynamic>();
