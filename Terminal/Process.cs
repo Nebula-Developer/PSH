@@ -7,29 +7,30 @@ namespace PSH.Terminal {
             startInfo.FileName = "/bin/bash";
             startInfo.Arguments = "-c \"" + command + "\"";
             startInfo.UseShellExecute = false;
-            startInfo.RedirectStandardOutput = false;
-            startInfo.RedirectStandardError = false;
-            startInfo.RedirectStandardInput = false;
-            startInfo.CreateNoWindow = true;
 
             Process process = new Process();
             process.StartInfo = startInfo;
             process.Start();
 
             process.OutputDataReceived += (sender, e) => {
+                Console.Out.Flush();
                 if (e.Data != null) {
-                    System.Console.WriteLine(e.Data);
+                    Console.Out.Write(e.Data);
+                    Console.Out.Write("\n\n");
+                    Console.Out.Flush();
                 }
             };
 
             process.ErrorDataReceived += (sender, e) => {
+                Console.Out.Flush();
                 if (e.Data != null) {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    System.Console.WriteLine(e.Data);
+                    Console.Out.Write(e.Data);
+                    Console.Out.Write("\n");
+                    Console.Out.Flush();
                     Console.ResetColor();
                 }
             };
-
             process.WaitForExit();
             process.Close();
             process.Dispose();
