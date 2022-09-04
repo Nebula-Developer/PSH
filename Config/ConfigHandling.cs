@@ -1,5 +1,6 @@
 using System.IO;
 using System;
+using PSH.Strings;
 
 namespace PSH.ConfigHandling {
     public class Config {
