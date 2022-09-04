@@ -31,7 +31,7 @@ namespace PSH {
                 String input = ShellInput.Read();
                 Console.Write("\n");
                 if (input == "exit") break;
-                Console.WriteLine("{0}", input);
+                Terminal.TermProc.Start(input);
             }
 
             Console.WriteLine("Exit");
