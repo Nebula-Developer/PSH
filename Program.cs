@@ -10,6 +10,7 @@ namespace PSH {
         public static PearlShell ShellInstance = new PearlShell(new PearlInput(), new Config());
 
         public static void Main(string[] args) {
+            Syntax.PearlSyntax.FetchPathItems();
             ShellInstance.Init();
         }
     }
