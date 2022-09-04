@@ -1,4 +1,4 @@
 .PHONY: build
 
 build:
-	@dotnet run
+	dotnet run

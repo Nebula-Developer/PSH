@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Volumes/PSH/PSH.csproj": {}
+    "/Users/nicocook/Documents/PSH/PSH.csproj": {}
   },
   "projects": {
-    "/Volumes/PSH/PSH.csproj": {
+    "/Users/nicocook/Documents/PSH/PSH.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Volumes/PSH/PSH.csproj",
+        "projectUniqueName": "/Users/nicocook/Documents/PSH/PSH.csproj",
         "projectName": "PSH",
-        "projectPath": "/Volumes/PSH/PSH.csproj",
+        "projectPath": "/Users/nicocook/Documents/PSH/PSH.csproj",
         "packagesPath": "/Users/nicocook/.nuget/packages/",
-        "outputPath": "/Volumes/PSH/obj/",
+        "outputPath": "/Users/nicocook/Documents/PSH/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/nicocook/.nuget/NuGet/NuGet.Config"
@@ -43,8 +43,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -53,7 +52,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.400/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/Cellar/dotnet/6.0.104_1/libexec/sdk/6.0.104/RuntimeIdentifierGraph.json"
         }
       }
     }

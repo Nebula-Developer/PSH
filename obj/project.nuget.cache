@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "R4+Bfk8U/ZcdDVonZXdCVL2zsqGWHG4ugwTj7++34Yog+gDF11B5GMUtqChW7guEgmWW2vDYrXiP0W5AsX820g==",
+  "dgSpecHash": "Y+neON2VBnx0FJWHYhhy0tuDyvOW1L6HuFjPKDlHLnUVBKe/gybhvckDEt3vfhvHBVHSiA+dKTeV9ysXXpavOw==",
   "success": true,
-  "projectFilePath": "/Volumes/PSH/PSH.csproj",
+  "projectFilePath": "/Users/nicocook/Documents/PSH/PSH.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
