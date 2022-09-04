@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Collections;
 
 namespace PSH.Input {
     public class PearlInput {
@@ -43,6 +45,13 @@ namespace PSH.Input {
             if (this.index < this.input.Length) this.index++;
         }
 
+        public void RemoveChar() {
+            if (this.index > 0) {
+                this.input = this.input.Remove(this.index - 1, 1);
+                this.index--;
+            }
+        }
+
         public string Read() {
             SetVariables();
 
@@ -53,6 +62,41 @@ namespace PSH.Input {
                 MoveCaret(index, input);
 
                 ConsoleKeyInfo key = Console.ReadKey(true);
+                int code = (int)key.KeyChar;
+
+                switch (code) {
+                    case 23:
+                        if (index <= 0) break;
+
+                        if (input[index - 1] == ' ') {
+                            while (index > 0 && input[index - 1] == ' ') {
+                                RemoveChar();
+                            }
+                            break;
+                        }
+
+                        // Keep deleting at index until we hit a space
+                        while (index > 0 && input[index - 1] != ' ') {
+                            RemoveChar();
+                        }
+                        break;
+
+                    case 21:
+                        if (index <= 0) break;
+
+                        while (index > 0) {
+                            RemoveChar();
+                        }
+                        break;
+                    
+                    case 1:
+                        index = 0;
+                        break;
+
+                    case 5:
+                        index = input.Length;
+                        break;
+                }
 
                 switch (key.Key) {
                     case ConsoleKey.LeftArrow:
@@ -70,12 +114,44 @@ namespace PSH.Input {
                     case ConsoleKey.Backspace:
                         if (index > 0) {
                             input = input.Remove(index - 1, 1);
-                            CaretBack();
+                            index--;
                         }
                         break;
 
                     default:
-                        if ((int)key.KeyChar >= 32 && (int)key.KeyChar <= 126) {
+                        if ((key.KeyChar == 'f' || key.KeyChar == 'b') && key.Modifiers == ConsoleModifiers.Alt) {
+                            bool right = key.KeyChar == 'f';
+                            
+                            if (right) {
+                                if (index >= input.Length) break;
+
+                                if (input[index] == ' ') {
+                                    while (index < input.Length && input[index] == ' ') {
+                                        CaretForward();
+                                    }
+                                    break;
+                                }
+
+                                // Keep moving forward until we hit a space
+                                while (index < input.Length && input[index] != ' ') {
+                                    CaretForward();
+                                }
+                            } else {
+                                if (index <= 0) break;
+
+                                if (input[index - 1] == ' ') {
+                                    while (index > 0 && input[index - 1] == ' ') {
+                                        CaretBack();
+                                    }
+                                    break;
+                                }
+
+                                // Keep moving backward until we hit a space
+                                while (index > 0 && input[index - 1] != ' ') {
+                                    CaretBack();
+                                }
+                            }
+                        } else if ((int)key.KeyChar >= 32 && (int)key.KeyChar <= 126) {
                             input = input.Insert(index, key.KeyChar.ToString());
                             index++;
                         }
