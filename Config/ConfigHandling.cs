@@ -26,7 +26,6 @@ namespace PSH.ConfigHandling {
                     string value = outLine.Substring(outLine.IndexOf("=") + 1);
 
                     config.Add(key, ParseStrValue(value));
-                    Console.WriteLine($"Config: {key} = {value} of type {config[key].GetType()}");
                 }
             } else {
                 return null;
@@ -66,7 +65,6 @@ namespace PSH.ConfigHandling {
                 List<dynamic> arrayOut = new List<dynamic>();
                 foreach (String arrayValue in array) {
                     dynamic? parsedValue = ParseStrValue(arrayValue);
-                    Console.WriteLine("added arr value " + parsedValue ?? "null" + " of type " + parsedValue?.GetType() ?? "null");
                     if (parsedValue != null)
                         arrayOut.Add(parsedValue);
                 }
