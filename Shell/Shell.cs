@@ -14,8 +14,6 @@ namespace PSH {
         /// </summary>
         public Config ShellConfig;
 
-        public String testVal = "testing";
-
         public PearlShell(PearlInput Input, Config Config) {
             ShellInput = Input;
             ShellConfig = Config;

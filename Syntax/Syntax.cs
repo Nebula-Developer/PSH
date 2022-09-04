@@ -13,10 +13,30 @@ namespace PSH.Syntax {
                 if (Directory.Exists(dir)) {
                     foreach (String file in Directory.GetFiles(dir)) {
                         PathItems.Add(Path.GetFileName(file));
-                        Console.WriteLine(Path.GetFileName(file));
                     }
                 }
             }
+        }
+
+        public static String? SearchFileSyntax(String path) {
+            String pathNew = path.Replace("~", Environment.GetEnvironmentVariable("HOME") ?? "");
+            String dir = Path.GetDirectoryName(pathNew) ?? "/";
+
+            if (File.Exists(dir) || !Directory.Exists(dir)) {
+                return null;
+            }
+
+            List<String> pathItems = new List<String>(PathItems);
+            pathItems.AddRange(Directory.GetFiles(dir));
+            pathItems.AddRange(Directory.GetDirectories(dir));
+
+            foreach (String item in pathItems) {
+                if (item.StartsWith(pathNew)) {
+                    Console.WriteLine(item);
+                    return item;
+                }
+            }
+            return null;
         }
     }
 }
