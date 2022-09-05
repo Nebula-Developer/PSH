@@ -52,14 +52,37 @@ namespace PSH.Input {
             }
         }
 
+        #region COLORS
+            public static string Color(int r, int g, int b) {
+                return $"\x1b[38;2;{r};{g};{b}m";
+            }
+
+            public static string Red = "\x1b[31m";
+            public static string Green = "\x1b[32m";
+            public static string Yellow = "\x1b[33m";
+            public static string Blue = "\x1b[34m";
+            public static string Magenta = "\x1b[35m";
+            public static string Cyan = "\x1b[36m";
+            public static string Grey = "\x1b[37m";
+            public static string Reset = "\x1b[0m";
+        #endregion
+
         public string Read() {
             SetVariables();
+            String oldPrefixStr = "";
 
             while (reading) {
+                String autocomplete = Syntax.Autocomplete.SearchAutocomplete(input, index) ?? "";
+                if (autocomplete.Length - input.Length > 0) {
+                    autocomplete = autocomplete.Substring(input.Length);
+                } else { autocomplete = ""; }
+
+                String prefixStr = Prefix() + input + autocomplete;
+                String prefixColStr = Prefix(true) + input + Grey + autocomplete + Reset;
                 Move(0);
-                String prefixStr = Prefix() + input;
-                Console.Write(prefixStr + new String(' ', Console.WindowWidth - 1 - prefixStr.Length));
+                Console.Write(prefixColStr + new String(' ', Math.Abs(oldPrefixStr.Length - prefixStr.Length)));
                 MoveCaret(index, input);
+                oldPrefixStr = prefixStr;
 
                 ConsoleKeyInfo key = Console.ReadKey(true);
                 int code = (int)key.KeyChar;
@@ -157,7 +180,6 @@ namespace PSH.Input {
                         }
                         break;
                 }
-                Console.WriteLine("\n" + Syntax.Autocomplete.SearchAutocomplete(input, index) + "\n");
             }
 
             return input;

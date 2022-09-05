@@ -15,7 +15,16 @@ namespace PSH.Syntax {
             String last = strSplit[strSplit.Length - 1];
 
             String output = RemLastSplit(str);
-            output += Syntax.PearlSyntax.SearchFileSyntax(last) ?? "";
+            String? FileComplete = Syntax.PearlSyntax.SearchFileSyntax(last);
+            String? PathComplete = Syntax.PearlSyntax.SearchPathSyntax(last);
+
+            if (FileComplete != null) {
+                output += FileComplete;
+            } else if (PathComplete != null) {
+                output += PathComplete;
+            } else {
+                return null;
+            }
             return output;
         }
     }

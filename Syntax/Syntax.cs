@@ -32,7 +32,15 @@ namespace PSH.Syntax {
 
             foreach (String item in pathItems) {
                 if (item.StartsWith(pathNew)) {
-                    Console.WriteLine(item);
+                    return item;
+                }
+            }
+            return null;
+        }
+
+        public static String? SearchPathSyntax(String str) {
+            foreach (String item in PathItems) {
+                if (item.StartsWith(str)) {
                     return item;
                 }
             }
