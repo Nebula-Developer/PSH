@@ -157,7 +157,7 @@ namespace PSH.Input {
                         }
                         break;
                 }
-                Console.WriteLine("\n" + Syntax.PearlSyntax.SearchFileSyntax(input) + "\n");
+                Console.WriteLine("\n" + Syntax.Autocomplete.SearchAutocomplete(input, index) + "\n");
             }
 
             return input;
