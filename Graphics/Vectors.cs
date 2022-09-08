@@ -56,14 +56,6 @@ namespace PSH.Graphics {
         public static Vector2 operator /(float a, Vector2 b) {
             return new Vector2(a / b.X, a / b.Y);
         }
-
-        public static bool operator ==(Vector2 a, Vector2 b) {
-            return a.X == b.X && a.Y == b.Y;
-        }
-
-        public static bool operator !=(Vector2 a, Vector2 b) {
-            return a.X != b.X || a.Y != b.Y;
-        }
     }
 
     public class Vector2i {
@@ -120,14 +112,6 @@ namespace PSH.Graphics {
 
         public static Vector2i operator /(int a, Vector2i b) {
             return new Vector2i(a / b.X, a / b.Y);
-        }
-
-        public static bool operator ==(Vector2i a, Vector2i b) {
-            return a.X == b.X && a.Y == b.Y;
-        }
-
-        public static bool operator !=(Vector2i a, Vector2i b) {
-            return a.X != b.X || a.Y != b.Y;
         }
 
         public static implicit operator Vector2(Vector2i a) {

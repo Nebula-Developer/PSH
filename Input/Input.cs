@@ -80,7 +80,7 @@ namespace PSH.Input {
                 String prefixStr = Prefix() + input + autocomplete;
                 String prefixColStr = Prefix(true) + input + Grey + autocomplete + Reset;
                 Move(0);
-                Console.Write(prefixColStr + new String(' ', Math.Abs(oldPrefixStr.Length - prefixStr.Length)));
+                Console.Write(prefixColStr + new String(' ', System.Math.Abs(oldPrefixStr.Length - prefixStr.Length)));
                 MoveCaret(index, input);
                 oldPrefixStr = prefixStr;
 
